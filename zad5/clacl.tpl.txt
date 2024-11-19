@@ -1,0 +1,45 @@
+!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pl" lang="pl">
+<head>
+    <meta charset="utf-8" />
+    <title>Kalkulator kredytowy</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+</head>
+<body>
+
+<div style="width:90%; margin: 2em auto;">
+    <a href="?action=home" class="pure-button">Strona główna</a>
+    <a href="{$smarty.const._APP_ROOT}/app/security/logout.php" class="pure-button pure-button-active">Wyloguj</a>
+</div>
+
+<div style="width:90%; margin: 2em auto;">
+    <h2>Kalkulator kredytowy</h2>
+    
+    {if $messages}
+        <ul style="color: red;">
+            {foreach from=$messages item=msg}
+                <li>{$msg}</li>
+            {/foreach}
+        </ul>
+    {/if}
+
+    <form action="?action=calc" method="post" class="pure-form pure-form-stacked">
+        <label for="amount">Kwota kredytu: </label>
+        <input type="text" id="amount" name="amount" value="{$amount|default:''}">
+        
+        <label for="years">Okres (lata): </label>
+        <input type="text" id="years" name="years" value="{$years|default:''}">
+        
+        <label for="interest">Oprocentowanie: </label>
+        <input type="text" id="interest" name="interest" value="{$interest|default:''}">
+        
+        <input type="submit" value="Oblicz" class="pure-button pure-button-primary">
+    </form>
+
+    {if isset($result)}
+        <h3>Miesięczna rata kredytu: {$result} PLN</h3>
+    {/if}
+</div>
+
+</body>
+</html>
